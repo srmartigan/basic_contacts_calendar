@@ -16,7 +16,7 @@ $conexion = conectarBaseDatos();
  *
  * @return PDO
  */
-function conectarBaseDatos() : PDO
+function conectarBaseDatos(): PDO
 {
     $datasMysql = $GLOBALS['datasMysql'];
     try {
@@ -50,17 +50,23 @@ function addContact(array $dataContact)
     $conexion->query(utf8_decode($sql));
 }
 
-function getContacts() :array
+function getContacts(): array
 {
     $conexion = getConexion();
     $sql = 'SELECT * FROM contactos';
     $dataPDOStatement = $conexion->query($sql);
     $data = $dataPDOStatement->fetchAll();
-   
+
     return $data;
 }
 
-function getConexion () : PDO
+function delContact(int $contact)
+{
+    $conexion = getConexion();
+    $sql = "Delete From contactos Where id='$contact'";
+    return $conexion->query($sql);
+}
+function getConexion(): PDO
 {
     $conexion = $GLOBALS['conexion'];
     if (!$conexion) {

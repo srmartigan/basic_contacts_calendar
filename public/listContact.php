@@ -24,7 +24,7 @@ $contacts = getContacts();
                         <td class="right">
                             <a href="#"><i class="material-icons" style="color:green">visibility</i></a>
                             <a href="#"><i class="material-icons" style="color:blue">edit</i></a>
-                            <a href= "../resources/library/deleteData.php ? <?php $contact['id'];?>">
+                            <a href= "../resources/library/deleteData.php?contact=<?php echo $contact['id'];?> ">
                                 <i class="material-icons" style="color:red">delete_forever</i>
                             </a>
                         </td>
