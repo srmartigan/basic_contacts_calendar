@@ -1,6 +1,8 @@
 <?php
-require_once('/opt/lampp/htdocs/tutoriales/phpMysql/resources/config.php');
-require_once(TEMPLATES_PATH . "/header.php");
+require ('../resources/config.php');
+require (TEMPLATES_PATH . "/header.php");
+require (LIBRARY_PATH . "/DataBase.php");
+$contacts = getContacts();
 ?>
 <div class="container">
     <div class="row " style="margin-top:20px">
@@ -14,35 +16,20 @@ require_once(TEMPLATES_PATH . "/header.php");
                         <th class="right">Opciones</th>
                     </tr>
                 </thead>
-
+                <? foreach ($contacts as $contact) : ?>
                 <tbody>
                     <tr>
-                        <td>Alvin</td>
-                        <td>Eclair</td>
+                        <td><? echo $contact['name']; ?></td>
+                        <td><? echo $contact['telephone']; ?></td>
                         <td class="right">
                             <a href="#"><i class="material-icons" style="color:green">visibility</i></a>
                             <a href="#"><i class="material-icons" style="color:blue">edit</i></a>
-                            <a href="#"><i class="material-icons" style="color:red">delete_forever</i></a>
+                            <a href= "../resources/library/deleteData.php ? <?php $contact['id'];?>">
+                                <i class="material-icons" style="color:red">delete_forever</i>
+                            </a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Alan</td>
-                        <td>Jellybean</td>
-                        <td class="right">
-                        <a href="#"><i class="material-icons" style="color:green">visibility</i></a>
-                            <a href="#"><i class="material-icons" style="color:blue">edit</i></a>
-                            <a href="#"><i class="material-icons" style="color:red">delete_forever</i></a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Jonathan</td>
-                        <td>Lollipop</td>
-                        <td class="right">
-                        <a href="#"><i class="material-icons" style="color:green">visibility</i></a>
-                            <a href="#"><i class="material-icons" style="color:blue">edit</i></a>
-                            <a href="#"><i class="material-icons" style="color:red">delete_forever</i></a>
-                        </td>
-                    </tr>
+                <? endforeach; ?>
                 </tbody>
             </table>
         </div>

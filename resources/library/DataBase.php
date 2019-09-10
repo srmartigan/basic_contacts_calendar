@@ -10,14 +10,6 @@ $datasMysql = [
 ];
 $conexion = conectarBaseDatos();
 
-// $datos = [
-//     'name' => 'Maria',
-//     'telephone' => '555111666',
-//     'email' => 'maria@gmail.com',
-//     'address' => 'mi calle nº 23 Barcelona'
-// ];
-
-// addContact($datos);
 
 /**
  * conectarBaseDatos
@@ -46,10 +38,7 @@ function conectarBaseDatos() : PDO
  */
 function addContact(array $dataContact)
 {
-    $conexion = $GLOBALS['conexion'];
-    if (!$conexion) {
-        conectarBaseDatos();
-    }
+    $conexion = getConexion();
     $sql = 'INSERT INTO contactos (name,telephone,email,address) 
         VALUES ("' .
         $dataContact["name"] . '","' .
@@ -59,4 +48,23 @@ function addContact(array $dataContact)
             )';
 
     $conexion->query(utf8_decode($sql));
+}
+
+function getContacts() :array
+{
+    $conexion = getConexion();
+    $sql = 'SELECT * FROM contactos';
+    $dataPDOStatement = $conexion->query($sql);
+    $data = $dataPDOStatement->fetchAll();
+   
+    return $data;
+}
+
+function getConexion () : PDO
+{
+    $conexion = $GLOBALS['conexion'];
+    if (!$conexion) {
+        $conexion = conectarBaseDatos();
+    }
+    return $conexion;
 }
